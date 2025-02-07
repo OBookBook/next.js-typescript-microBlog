@@ -1,5 +1,14 @@
+import Link from "next/link";
+
 const postsPage = () => {
-  return <div>postsPage</div>;
+  return (
+    <>
+      <h1>posts page</h1>
+      <Link href="/" className="text-blue-500">
+        Home
+      </Link>
+    </>
+  );
 };
 
 export default postsPage;
