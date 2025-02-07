@@ -5,8 +5,4 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-
-  img {
-    border-radius: 50%;
-  }
 }
