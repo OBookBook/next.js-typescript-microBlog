@@ -21,6 +21,9 @@ export const generateMetadata = () => {
 export const dynamic = "force-static";
 export const revalidate = false;
 
+// SSRの設定をしたい場合
+// export const dynamic = "force-dynamic";
+
 export default async function Home(): Promise<React.ReactNode> {
   const allPostsData = (await getPostsData()) as Post[];
   console.log(allPostsData);
