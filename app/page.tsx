@@ -14,10 +14,10 @@ export default function Home() {
         <div className="space-y-6">
           <div className="text-center space-y-4">
             <p className="text-3xl font-bold tracking-tight">
-              I'm a software engineer.
+              I&apos;m a software engineer.
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              I'm a software engineer with a passion for building web
+              I&apos;m a software engineer with a passion for building web
               applications.
             </p>
           </div>
