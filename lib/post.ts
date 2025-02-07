@@ -19,3 +19,18 @@ export function getPostsData() {
 
   return allPostsData;
 }
+
+export function getAllPostIds(): {
+  params: {
+    id: string;
+  };
+}[] {
+  const fileNames = fs.readdirSync(postsDirectory);
+  return fileNames.map((fileName) => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, ""),
+      },
+    };
+  });
+}
