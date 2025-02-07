@@ -1,5 +1,12 @@
 import Link from "next/link";
 
+export const generateMetadata = () => {
+  return {
+    title: "Home",
+    description: "Home page",
+  };
+};
+
 export default function Home() {
   return (
     <>

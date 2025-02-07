@@ -1,5 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+
+export const generateMetadata = () => {
+  return {
+    title: "Posts",
+    description: "Posts page",
+  };
+};
+
 const postsPage = () => {
   return (
     <>
