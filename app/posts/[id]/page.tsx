@@ -1,6 +1,7 @@
 import React from "react";
 import { getAllPostIds, getPostData } from "@/lib/post";
 import Link from "next/link";
+import Image from "next/image";
 
 export const generateMetadata = async ({
   params,
@@ -19,13 +20,11 @@ export function generateStaticParams() {
   const allPostIds = getAllPostIds();
 
   return allPostIds.map((postId) => ({
-    params: {
-      id: postId.params.id,
-    },
+    id: postId.params.id,
   }));
 }
 
-const Page = async ({ params }: { params: { id: string } }) => {
+export default async function Page({ params }: { params: { id: string } }) {
   const post = await getPostData(params.id);
 
   return (
@@ -33,9 +32,11 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <div className="text-gray-600 mb-4">{post.date}</div>
       <div className="mb-8">
-        <img
+        <Image
           src={post.thumbnail}
           alt={post.title}
+          width={800}
+          height={400}
           className="w-full h-64 object-cover rounded-lg shadow-lg"
         />
       </div>
@@ -45,6 +46,4 @@ const Page = async ({ params }: { params: { id: string } }) => {
       </Link>
     </article>
   );
-};
-
-export default Page;
+}
