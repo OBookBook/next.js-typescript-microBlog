@@ -2,10 +2,15 @@ import React from "react";
 import { getAllPostIds, getPostData } from "@/lib/post";
 import Link from "next/link";
 
-export const generateMetadata = () => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
+  const post = await getPostData(params.id);
   return {
-    title: "Post Detail",
-    description: "Post Detail page",
+    title: post.title,
+    description: post.content,
   };
 };
 
