@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllPostIds } from "@/lib/post";
+import { getAllPostIds, getPostData } from "@/lib/post";
 
 export const generateMetadata = () => {
   return {
@@ -19,8 +19,23 @@ export function generateStaticParams() {
   }));
 }
 
-const postDetail = () => {
-  return <div>postDetail</div>;
+const postDetail = async ({ params }: { params: { id: string } }) => {
+  const post = await getPostData(params.id);
+
+  return (
+    <article className="max-w-3xl mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+      <div className="text-gray-600 mb-4">{post.date}</div>
+      <div className="mb-8">
+        <img
+          src={post.thumbnail}
+          alt={post.title}
+          className="w-full h-64 object-cover rounded-lg shadow-lg"
+        />
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </article>
+  );
 };
 
 export default postDetail;
