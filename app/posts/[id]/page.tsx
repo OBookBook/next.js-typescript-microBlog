@@ -1,5 +1,6 @@
 import React from "react";
 import { getAllPostIds, getPostData } from "@/lib/post";
+import Link from "next/link";
 
 export const generateMetadata = () => {
   return {
@@ -34,6 +35,9 @@ const postDetail = async ({ params }: { params: { id: string } }) => {
         />
       </div>
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <Link href="/" className="mt-6 text-blue-500 hover:underline">
+        Return Posts
+      </Link>
     </article>
   );
 };
