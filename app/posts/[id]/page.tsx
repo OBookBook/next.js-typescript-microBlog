@@ -1,41 +1,46 @@
 import React from "react";
 import { getAllPostIds, getPostData } from "@/lib/post";
 import Link from "next/link";
+import Image from "next/image";
+import { Metadata } from "next";
 
-export const generateMetadata = async ({
+type Params = Promise<{ id: string }>;
+export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
-}) => {
-  const post = await getPostData(params.id);
+  params: Params;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const post = await getPostData(resolvedParams.id);
   return {
     title: post.title,
     description: post.content,
   };
-};
+}
 
 export const dynamicParams = false;
 export function generateStaticParams() {
   const allPostIds = getAllPostIds();
 
   return allPostIds.map((postId) => ({
-    params: {
-      id: postId.params.id,
-    },
+    id: postId.params.id,
   }));
 }
 
-const postDetail = async ({ params }: { params: { id: string } }) => {
-  const post = await getPostData(params.id);
+export default async function Page({ params }: { params: Params }) {
+  const resolvedParams = await params;
+  const post = await getPostData(resolvedParams.id);
 
   return (
     <article className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <div className="text-gray-600 mb-4">{post.date}</div>
       <div className="mb-8">
-        <img
+        <Image
           src={post.thumbnail}
           alt={post.title}
+          width={800}
+          height={400}
           className="w-full h-64 object-cover rounded-lg shadow-lg"
         />
       </div>
@@ -45,6 +50,4 @@ const postDetail = async ({ params }: { params: { id: string } }) => {
       </Link>
     </article>
   );
-};
-
-export default postDetail;
+}
