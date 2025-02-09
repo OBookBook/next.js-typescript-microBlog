@@ -2,18 +2,19 @@ import React from "react";
 import { getAllPostIds, getPostData } from "@/lib/post";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 
-export const generateMetadata = async ({
-  params,
-}: {
+type Props = {
   params: { id: string };
-}) => {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostData(params.id);
   return {
     title: post.title,
     description: post.content,
   };
-};
+}
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -24,7 +25,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: Props) {
   const post = await getPostData(params.id);
 
   return (
