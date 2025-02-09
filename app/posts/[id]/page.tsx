@@ -25,7 +25,7 @@ export function generateStaticParams() {
   }));
 }
 
-const postDetail = async ({ params }: { params: { id: string } }) => {
+const Page = async ({ params }: { params: { id: string } }) => {
   const post = await getPostData(params.id);
 
   return (
@@ -47,4 +47,4 @@ const postDetail = async ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default postDetail;
+export default Page;
