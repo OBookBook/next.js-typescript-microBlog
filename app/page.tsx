@@ -49,12 +49,13 @@ export default async function Home(): Promise<React.ReactNode> {
                   href={`/posts/${id}`}
                   className="block transition-colors hover:text-blue-500"
                 >
-                  <div className="overflow-hidden rounded-lg">
+                  <div className="overflow-hidden rounded-lg aspect-video relative">
                     <Image
                       src={thumbnail}
                       alt={title}
-                      width={500}
-                      height={100}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={id === allPostsData[0].id}
                       className="object-cover transition-transform duration-200 group-hover:scale-105"
                     />
                   </div>
