@@ -4,12 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 
-type Props = {
-  params: { id: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostData(params.id);
+type Params = Promise<{ id: string }>;
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const post = await getPostData(resolvedParams.id);
   return {
     title: post.title,
     description: post.content,
@@ -25,8 +27,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: Props) {
-  const post = await getPostData(params.id);
+export default async function Page({ params }: { params: Params }) {
+  const resolvedParams = await params;
+  const post = await getPostData(resolvedParams.id);
 
   return (
     <article className="max-w-3xl mx-auto px-4 py-8">
