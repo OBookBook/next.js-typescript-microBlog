@@ -8,7 +8,7 @@ export const generateMetadata = () => {
   };
 };
 
-// static generation
+export const dynamicParams = false;
 export function generateStaticParams() {
   const allPostIds = getAllPostIds();
 
